@@ -7,6 +7,7 @@ from django.conf import settings
 
 from trader.models import Decks
 
+from datetime import datetime
 import bitlyapi
 from  hashlib import md5
 from urllib import urlencode
@@ -130,6 +131,9 @@ def index(request):
             # set to new data object
             label = '2'
 
+        # Add a timestamp
+        timestamp = datetime.now().strftime("%A %d. %B %Y @ %H:%M")
+
         # only create cache if no errors were givin
         if not message1 and not message2:
             # create a unique hash of our data
@@ -139,7 +143,7 @@ def index(request):
             try:
                 Decks.objects.get(hash=deck_hash)
             except ObjectDoesNotExist:
-                c = Decks(hash=deck_hash, data1=clean_data1, data2=clean_data2)
+                c = Decks(hash=deck_hash, data1=clean_data1, data2=clean_data2, time=timestamp)
                 c.save()
         
             # provide a direct url
@@ -152,7 +156,7 @@ def index(request):
             res = b.shorten(longUrl='%s' % direct_url)
             url = res['url']
 
-            return render(request, 'list.html', {'results1': results1, 'results2': results2, 'total1': deck_total1, 'total2': deck_total2, 'short': url})
+            return render(request, 'list.html', {'results1': results1, 'results2': results2, 'total1': deck_total1, 'total2': deck_total2, 'short': url, 'time': timestamp})
 
         else:
             # if we had any error messages return them and send the user 
