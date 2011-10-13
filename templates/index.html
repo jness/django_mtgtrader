@@ -1,0 +1,42 @@
+{% include 'header.html' %}
+<body>
+<center>
+<img src='/static/mtg.jpg' /><br>
+<h2>Trade Comparison</h2>
+
+<form name="form" action="." method="POST">
+{% csrf_token %}
+<table cellpadding=5 cellspacing=5>
+	<tr>
+		<td valign=bottom>
+		  {% if error1 %}
+		  <font color='red'>Failed to lookup up the following cards:<br>
+			 {% for e in error1 %}
+				<b>* {{ e }}</b><br>
+			 {% endfor %}
+		  </font>
+		  {% endif %}
+
+		  <textarea cols="50" rows="25" name="deck1">
+{% if data1 %}{{ data1 }}{% else %}1 Giant Growth{% endif %}
+		  </textarea><br>
+		</td>
+
+		<td valign=bottom>
+		  {% if error2 %}
+        <font color='red'>Failed to lookup up the following cards:<br>
+          {% for e in error2 %}
+            <b>* {{ e }}</b><br>
+          {% endfor %}
+        </font>
+        {% endif %}
+
+        <textarea cols="50" rows="25" name="deck2">
+{% if data2 %}{{ data2 }}{% else %}1 Giant Growth{% endif %}
+        </textarea><br>
+		</td>
+	</tr>
+</table>
+<input type="submit" value="Compare Trade" />
+</form>
+{% include 'footer.html' %}

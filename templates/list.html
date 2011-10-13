@@ -1,0 +1,80 @@
+{% include 'header.html' %}
+<body>
+<center>
+<img src='/static/mtg.jpg' /><br>
+
+<h3><a href='.'><font color='blue' size='3'>Price New Deck</font></a></h3>
+<b><font size='2'>Direct Link:</font></b> <a href='{{ short }}'><font color='blue' size='2'>{{ short }}</font></a><br><br>
+<ul class="hoverbox">
+
+<table cellpadding=15 cellspacing=15>
+<tr>
+<td>
+<table cellpadding='4' width='575'>
+  <tr bgcolor='black'>
+ 	 <td width='50'><font color='white'><b>#</b></font></td>
+	 <td width='325'><font color='white'><b>Card</b></font></td>
+	 <td width='75'><font color='white'><b>Each</b></font></td>
+	 <td width='75'><font color='white'><b>Total</b></font></td>
+  </tr>
+
+  {% for r in results1 %}
+  <tr>
+	 <td>{{ r.count }}</td>
+	 <td>
+           <a target='_blank' class="hoverbox" href="/gatherer/{{ r.name }}" onmouseover="this.children[0].src='http://magic.tcgplayer.com/db/wp-ch.asp?CN={{ r.name|escapejs }}'"
+>{{ r.name }}<iframe class="preview" width='100' height='100' src='about:blank'></iframe>
+           </a>
+    </td>
+
+	 <td><a href='http://magic.tcgplayer.com/db/magic_single_card.asp?cn={{ r.name }}'><font color='blue'>${{ r.price_each }}</font></a></td>
+	 <td><a href='http://magic.tcgplayer.com/db/magic_single_card.asp?cn={{ r.name }}'><font color='blue'>${{ r.price }}</font></a></td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table width='575' cellpadding='15'>
+  <tr>
+	 <td align='right'>
+	  <b>Total Price: {{ total1 }}</b>
+	 </td>
+  </td>
+</table>
+</td>
+
+<td>
+<table cellpadding='4' width='575'>
+  <tr bgcolor='black'>
+    <td width='50'><font color='white'><b>#</b></font></td>
+    <td width='325'><font color='white'><b>Card</b></font></td>
+    <td width='75'><font color='white'><b>Each</b></font></td>
+    <td width='75'><font color='white'><b>Total</b></font></td>
+  </tr>
+
+  {% for r in results2 %}
+  <tr>
+    <td>{{ r.count }}</td>
+    <td>
+           <a target='_blank' class="hoverbox" href="/gatherer/{{ r.name }}" onmouseover="this.children[0].src='http://magic.tcgplayer.com/db/wp-ch.asp?CN={{ r.name|escapejs }}'"
+>{{ r.name }}<iframe class="preview" width='100' height='100' src='about:blank'></iframe>
+           </a>
+    </td>
+
+    <td><a href='http://magic.tcgplayer.com/db/magic_single_card.asp?cn={{ r.name }}'><font color='blue'>${{ r.price_each }}</font></a></td>
+    <td><a href='http://magic.tcgplayer.com/db/magic_single_card.asp?cn={{ r.name }}'><font color='blue'>${{ r.price }}</font></a></td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table width='575' cellpadding='15'>
+  <tr>
+    <td align='right'>
+     <b>Total Price: {{ total2 }}</b>
+    </td>
+  </td>
+</table>
+</td>
+</tr>
+</table>
+</ul>
+{% include 'footer.html' %}

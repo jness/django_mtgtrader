@@ -1,0 +1,5 @@
+*.egg-info
+settings.py
+deck.sql
+*.pyc
+*.swp
