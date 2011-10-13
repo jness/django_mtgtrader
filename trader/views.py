@@ -28,6 +28,7 @@ def index(request):
             obj = Decks.objects.get(hash=deck_hash)
             data1 = obj.data1
             data2 = obj.data2
+            timestamp = obj.time
         except ObjectDoesNotExist:
             raise Http404
     except:
@@ -132,7 +133,8 @@ def index(request):
             label = '2'
 
         # Add a timestamp
-        timestamp = datetime.now().strftime("%A %d. %B %Y @ %H:%M")
+        if not timestamp:
+            timestamp = datetime.now().strftime("%A %d. %B %Y @ %H:%M")
 
         # only create cache if no errors were givin
         if not message1 and not message2:
