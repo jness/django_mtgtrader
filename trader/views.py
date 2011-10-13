@@ -20,6 +20,7 @@ def index(request):
     # Start with no errors
     message1 = None
     message2 = None
+    timestamp = None
 
     # check if this is a deck lookup
     try:
