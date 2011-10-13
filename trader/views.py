@@ -111,24 +111,24 @@ def index(request):
                 # this should avoid multiple cache for same results
                 clean_data = clean_data + '%s %s\n' % (count, card.title())
 
-                # using all the total prices add them together as a float,
-                # this gives os the total deck cost
-                deck_total = ('%.2f' % (sum(float(i) for i in total_cost)))
+            # using all the total prices add them together as a float,
+            # this gives os the total deck cost
+            deck_total = ('%.2f' % (sum(float(i) for i in total_cost)))
 
-                # janky way to run two seperate lookups
-                if label == '1':
-                    deck_total1 = deck_total
-                    results1 = results
-                    message1 = message
-                    clean_data1 = clean_data
-                else:
-                    deck_total2 = deck_total
-                    results2 = results
-                    message2 = message
-                    clean_data2 = clean_data
+            # janky way to run two seperate lookups
+            if label == '1':
+                deck_total1 = deck_total
+                results1 = results
+                message1 = message
+                clean_data1 = clean_data
+            else:
+                deck_total2 = deck_total
+                results2 = results
+                message2 = message
+                clean_data2 = clean_data
 
-                # set to new data object
-                label = '2'
+            # set to new data object
+            label = '2'
 
         # only create cache if no errors were givin
         if not message1 and not message2:
