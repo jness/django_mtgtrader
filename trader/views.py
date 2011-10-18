@@ -87,6 +87,7 @@ def index(request):
                     # tcgplayer does not return a 404
                     prices = compile('\$(\d*.\d\d)\r\n[\t]*</div>').findall(u.read())
                     lowest_price = prices[2]
+                    avg_price = prices[1]
                 except IndexError:
                     # if a price was not pulled the card failed to lookup (misspelled?)
                     # notify the end user
@@ -106,9 +107,9 @@ def index(request):
                 # django template
                 results.append({'name': card.title(), 
                                 'count': count, 
-                                'price_each': lowest_price, 
-                                'price': '%.2f' % (float(lowest_price) * int(count))})
-                total_cost.append('%.2f' % (float(lowest_price) * int(count)))
+                                'price_each': avg_price, 
+                                'price': '%.2f' % (float(avg_price) * int(count))})
+                total_cost.append('%.2f' % (float(avg_price) * int(count)))
 
                 # append data to clean_data var,
                 # this should avoid multiple cache for same results
